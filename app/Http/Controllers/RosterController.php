@@ -4,26 +4,39 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-<?php
-
-namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-
 class RosterController extends Controller
 {
     public function indexRoster()
     {
-        return "vista principal del cuadrante ( En construcción)";
+        return view('roster.index');
     }
 
     public function summaryRoster()
     {
-        return "resumen del Cuadrante ( En construcción)";
+        return view('roster.summary'); 
     }
 
     public function indexEmployees()
     {
-        return "vista principal de empleados ( En construcción)";
-    }   
+        return view('employees.index');     
+    }
+
+    public function showEmployee(int $id)
+    {
+        return view('employees.show', ['id' => $id]);
+    }
+
+    public function assign(Request $request)
+    {
+        return view('roster.assign', [
+            'empleadoId' => $request->input('employee_id')
+        ]);
+    }
+
+    public function remove(Request $request)
+    {
+        return view('roster.summary', [
+            'empleadoId' => $request->input('employee_id')
+        ]);
+    }
 }

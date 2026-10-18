@@ -1,38 +1,27 @@
 <?php
 
-namespace App\Http\Controllers;
+declare(strict_types=1);
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RosterController;
 
-class RosterController extends Controller
-{
-    public function indexRoster()
-    {
-        return "vista principal del cuadrante ( En construcción)";
-    }
+Route::redirect('/', '/cuadrante');
 
-    public function summaryRoster()
-    {
-        return "resumen del Cuadrante ( En construcción)";
-    }
+Route::get('/empleados', [RosterController::class, 'indexEmployees'])
+    ->name('employees.index');
 
-    public function indexEmployees()
-    {
-        return "vista principal de empleados ( En construcción)";
-    }
+Route::get('/empleados/{id}', [RosterController::class, 'showEmployee'])
+    ->whereNumber('id')
+    ->name('employees.show');
 
-    public function showEmployee(int $id)
-    {
-        return "Detalle del empleado con ID: " . $id . " ( En construcción)";
-    }
+Route::get('/cuadrante', [RosterController::class, 'indexRoster'])
+    ->name('roster.index');
 
-    public function assign(Request $request)
-    {
-        return "Procesando asignación de turno ( En construcción)";
-    }
+Route::get('/cuadrante/resumen', [RosterController::class, 'summaryRoster'])
+    ->name('roster.summary');
 
-    public function remove(Request $request)
-    {
-        return "Procesando eliminación de turno ( En construcción)";
-    }
-}
+Route::post('/cuadrante/asignar', [RosterController::class, 'assign'])
+    ->name('roster.assign');
+
+Route::post('/cuadrante/quitar', [RosterController::class, 'remove'])
+    ->name('roster.remove');
