@@ -4,6 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
 class RosterController extends Controller
 {
     public function indexRoster()
@@ -11,9 +17,13 @@ class RosterController extends Controller
         return "vista principal del cuadrante ( En construcción)";
     }
 
-    // public function summaryRoster()
+    public function summaryRoster()
     {
-     return<2resumen del Cuadrante ( En construcción)";
+        return "resumen del Cuadrante ( En construcción)";
     }
-public function IndexEmployees();{
+
+    public function indexEmployees()
+    {
+        return "vista principal de empleados ( En construcción)";
+    }   
 }
