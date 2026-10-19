@@ -7,7 +7,12 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">  
 </head>
 <body>
-    <h1><b>Detalle del empleado con ID: {{ $id }}</b></h1>
-    <p>Estado: en construcción</p>
+    <main>
+        <h1><b>Detalle del empleado con ID: {{ $id }}</b></h1>
+        <p>Información detallada del empleado seleccionando el identificador <strong>{{ $id }}</strong>.</p>
+
+        <br>
+        <a href="{{ route('employees.index') }}">← Volver a la lista de empleados</a>
+    </main>
 </body>
 </html>

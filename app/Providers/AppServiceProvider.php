@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Contracts\RosterStore;
+use App\Services\SessionRosterStore;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -11,7 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(RosterStore::class, SessionRosterStore::class);
     }
 
     /**
@@ -21,4 +23,4 @@ class AppServiceProvider extends ServiceProvider
     {
         //
     }
-}
+ }
