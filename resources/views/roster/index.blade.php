@@ -52,6 +52,10 @@
 
             <button type="submit">Asignar</button>
         </form>
+        <form action="{{ route('roster.undo') }}" method="POST" style="display:inline;">
+    @csrf
+    <button type="submit" class="btn btn-warning">Deshacer última acción</button>
+</form>
 
         <hr>
 
