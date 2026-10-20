@@ -1,0 +1,14 @@
+<?php
+
+namespace App\Contracts;
+
+interface RosterStore
+{
+    public function get(): array;
+
+    public function assign(string $day, string $shift, int $employeeId): void;
+
+    public function remove(string $day, string $shift): void;
+
+    public function clear(): void;
+}
