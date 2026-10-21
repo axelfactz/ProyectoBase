@@ -62,7 +62,7 @@ public function assign(AssignShiftRequest $request)
         ->with('status', 'Empleado asignado correctamente.');
 }
 
-    // 7. Procesa la eliminación del turno y redirige (F03)
+ // 7. Procesa la eliminación del turno y redirige (F03)
     public function remove(Request $request)
     {
         $day = $request->input('day');
@@ -71,6 +71,15 @@ public function assign(AssignShiftRequest $request)
         $this->rosterStore->remove($day, $shift);
 
         return redirect()->route('roster.index')
-            ->with('status', 'Asignación eliminada correctamente.');
+            ->with('status', 'Turno eliminado correctamente.');
+    }
+
+    // 8. Deshace o limpia los cambios del cuadrante (F03/Optativa)
+    public function undo()
+    {
+        $this->rosterStore->clear();
+
+        return redirect()->route('roster.index')
+            ->with('status', 'Cuadrante reiniciado correctamente.');
     }
 }
