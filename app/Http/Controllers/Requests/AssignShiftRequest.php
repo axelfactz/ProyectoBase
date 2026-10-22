@@ -13,10 +13,10 @@ class AssignShiftRequest extends FormRequest
 
     public function rules(): array
     {
-        return [
-            'day' => ['required', 'string', 'in:lunes,martes,miercoles,jueves,viernes,sabado,domingo'],
-            'shift' => ['required', 'string', 'in:manana,tarde,noche'],
-            'employee_id' => ['required', 'integer', 'min:1'],
-        ];
+       return [
+        'day' => 'required|string',
+        'shift' => 'required|string',
+        'employee_id' => 'required|integer|min:1',
+    ]; 
     }
 }

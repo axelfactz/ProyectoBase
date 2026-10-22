@@ -15,11 +15,9 @@ class SessionRosterStore implements RosterStore
 
     public function assign(string $day, string $shift, int $employeeId): void
     {
-        $this->saveToHistory();
-
-        $roster = $this->get();   
-        $roster[$day][$shift] = $employeeId;
-        session()->put($this->sessionKey, $roster);
+      $roster = session()->get('roster', []);
+    $roster[$day][$shift] = $employeeId;
+    session()->put('roster', $roster);
     }
 
     public function remove(string $day, string $shift): void
