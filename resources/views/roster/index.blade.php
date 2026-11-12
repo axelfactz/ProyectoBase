@@ -52,10 +52,11 @@
 
             <button type="submit">Asignar</button>
         </form>
-        <form action="{{ route('roster.undo') }}" method="POST" style="display:inline;">
-    @csrf
-    <button type="submit" class="btn btn-warning">Deshacer última acción</button>
-</form>
+
+        <form action="{{ route('roster.undo') }}" method="POST" style="display:inline; margin-top: 10px;">
+            @csrf
+            <button type="submit" class="btn btn-warning">Deshacer última acción</button>
+        </form>
 
         <hr>
 
@@ -64,10 +65,38 @@
         @if(empty($roster))
             <p>No hay asignaciones registradas todavía.</p>
         @else
-            <pre>{{ print_r($roster, true) }}</pre>
+            <table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; margin-top: 15px; width: 100%; max-width: 600px;">
+                <thead>
+                    <tr style="background-color: #f2f2f2;">
+                        <th>Día</th>
+                        <th>Turno</th>
+                        <th>ID Empleado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($roster as $day => $shifts)
+                        @foreach($shifts as $shift => $employeeId)
+                            <tr>
+                                <td style="text-align: center;">{{ ucfirst($day) }}</td>
+                                <td style="text-align: center;">{{ ucfirst($shift) }}</td>
+                                <td style="text-align: center;"><strong>{{ $employeeId }}</strong></td>
+                                <td style="text-align: center;">
+                                    <form action="{{ route('roster.remove') }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        <input type="hidden" name="day" value="{{ $day }}">
+                                        <input type="hidden" name="shift" value="{{ $shift }}">
+                                        <button type="submit">Eliminar</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endforeach
+                </tbody>
+            </table>
         @endif
 
-        <br>
+        <br><br>
         <a href="{{ route('roster.summary') }}">Ver resumen del cuadrante</a> | 
         <a href="{{ route('employees.index') }}">Ir a lista de empleados</a>
     </main>
